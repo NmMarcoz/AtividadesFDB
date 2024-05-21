@@ -24,7 +24,7 @@ public class Querys {
             + "password = ? "
             + "WHERE idUser = ?";
     
-    public static String ELIMINAR = "DELETE FROM user WHERE id = ?";
+    public static String ELIMINAR = "DELETE FROM user WHERE idUser = ?";
     
     public static String ELIMINAR_TODOS = "TRUNCATE TABLE user";
     

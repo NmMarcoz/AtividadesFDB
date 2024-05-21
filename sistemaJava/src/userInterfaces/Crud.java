@@ -250,7 +250,20 @@ public class Crud extends javax.swing.JFrame {
 
     //LISTENERS NÃO UTILIZADOS ABAIXO
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-      
+        int fila = userDashboard.getSelectedRow();
+        
+        Querys q = new Querys();
+        
+        q.setId(userDashboard.getValueAt(fila, 0).toString());
+        
+       if (JOptionPane.showConfirmDialog(this, "Delete user?", "",
+                JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+           if(UserServices.delete(q)){
+               UserServices.setListar("");
+               JOptionPane.showMessageDialog(this,"User deleted with success.", "info", JOptionPane.INFORMATION_MESSAGE);
+           }
+       }
+        
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void pesquisarFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarFieldActionPerformed

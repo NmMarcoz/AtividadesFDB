@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+    
+}
+
+h1{
+    margin: 0;
+}
+h2{
+    margin: 0;
+}
+.title-container{
+    padding-left: 46px;
+    padding-top: 36px;
+}
+
+.title{
+    color: #fff;
+    font-family: 'Poppins';
+    font-weight: 400;
+}
+
+header{
+    background: #1C1A1A;
+    width: 100vw;
+    height: 117px;
+}
+
+.page-container{
+    margin-top: 37px;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+
+.table-nav{
+    display: flex;
+    margin-bottom: 37px;
+}
+.table-main-nav-container{
+    display: flex;
+}
+.table-nav-container{
+    display: flex;
+}
+.table-right-nav-container{
+    margin-left: 960px;
+}
