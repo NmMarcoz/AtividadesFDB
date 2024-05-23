@@ -4,7 +4,7 @@ const findAllPeças = async (req, res) => {
   try {
     console.log("aqui");
     peças = await Peças.findAll();
-    if (!peças) {
+    if (peças.length === 0) {
       return res.status(404).send({
         message: "Sem peças cadastradas",
       });
@@ -18,13 +18,14 @@ const findAllPeças = async (req, res) => {
     return res.status(500).send({
       message: "Erro durante a consulta de dados",
       error: error,
-    });
+    }); 
   }
 };
 
 const findPerName = async (req, res) => {
   try {
     const nome = req.query.nome;
+    console.log("aquiiii");
     console.log(nome);
     if (!nome) {
       return res.status(400).send({
@@ -33,12 +34,14 @@ const findPerName = async (req, res) => {
     }
 
     const peça = await Peças.findAll({ where: { nome: nome } });
-
-    if (!peça) {
-      return res.status(400).send({
-        message: "Não existem peças cadastradas com esse nome",
-      });
+    console.log(peça)
+    if (peça.length ===0) {
+        return res.status(400).send({
+            message: "não existem peças com esse nome"
+        })
+        
     }
+
     return res.status(200).send({
       message: "Sucesso!",
       peça: peça,
@@ -62,6 +65,7 @@ const findByPk = async (req, res) => {
     }
     const peça = await Peças.findByPk(id);
     if (!peça) {
+      console.log("....");
       return res.status(400).send({
         message: "Não existem peças cadastradas com esse ID",
       });
@@ -71,7 +75,7 @@ const findByPk = async (req, res) => {
       peça: peça,
     });
   } catch (error) {
-    res.status(500).send({
+    res.status(500).send({  
       message: "Não foi possível concluir a requisição",
       erro: error,
     });
@@ -104,9 +108,34 @@ const createPeça = async (req, res) => {
   }
 };
 
+const deleteByPk = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).send({
+        message: "id é obrigatório",
+      });
+    } 
+    await Peças.destroy({
+      where: {
+        id: id,
+      },
+    });
+    return res.status(200).send({
+      message: "Peça removida com sucesso",
+      id: id,
+    });
+  } catch (error) {
+    res.status(500).send({
+      message: "Erro interno de servidor",
+    });
+  }
+};
+
 module.exports = {
   findAllPeças,
   createPeça,
   findPerName,
   findByPk,
+  deleteByPk,
 };
