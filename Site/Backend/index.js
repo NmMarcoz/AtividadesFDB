@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
+const cors = require('cors');
 const peçasRouter = require('./routers/peçasRouter')
 
 const db = require('./models');
-
+app.use(cors());
 app.use('/pecas', peçasRouter);
+
 
 
 

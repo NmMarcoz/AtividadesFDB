@@ -1,9 +1,10 @@
-const { Peças } = require("../models");
+const { Pecas } = require("../models");
 
 const findAllPeças = async (req, res) => {
   try {
     console.log("aqui");
-    peças = await Peças.findAll();
+    peças = await Pecas.findAll();
+    console.log(peças)
     if (peças.length === 0) {
       return res.status(404).send({
         message: "Sem peças cadastradas",
@@ -33,7 +34,7 @@ const findPerName = async (req, res) => {
       });
     }
 
-    const peça = await Peças.findAll({ where: { nome: nome } });
+    const peça = await Pecas.findAll({ where: { nome: nome } });
     console.log(peça)
     if (peça.length ===0) {
         return res.status(400).send({
@@ -63,7 +64,7 @@ const findByPk = async (req, res) => {
         message: "O campo ID é obrigatório!",
       });
     }
-    const peça = await Peças.findByPk(id);
+    const peça = await Pecas.findByPk(id);
     if (!peça) {
       console.log("....");
       return res.status(400).send({
@@ -88,13 +89,13 @@ const createPeça = async (req, res) => {
     console.log(req.body);
     //console.log(req.body.tipo)
     console.log(request);
-    const { nome, tipo, preço } = request;
-    if (!nome || !tipo || !preço) {
+    const { nome, tipo, preco } = request;
+    if (!nome || !tipo || !preco) {
       return res
         .status(400)
         .send({ message: "Todos os campos são obrigatórios." });
     }
-    await Peças.create(request);
+    await Pecas.create(request);
     return res.status(200).send({
       message: "Peça registrada com sucesso!",
       request: request,
@@ -116,7 +117,7 @@ const deleteByPk = async (req, res) => {
         message: "id é obrigatório",
       });
     } 
-    await Peças.destroy({
+    await Pecas.destroy({
       where: {
         id: id,
       },

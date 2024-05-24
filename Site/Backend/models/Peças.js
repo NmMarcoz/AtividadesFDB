@@ -1,7 +1,7 @@
 const {sequelize, DataTypes} = require('sequelize');
 
 module.exports =(sequelize, DataTypes) =>{
-    const Peças = sequelize.define('Peças',{
+    const Pecas = sequelize.define('Pecas',{
         nome:{
             type: DataTypes.STRING,
             allowNull: false
@@ -11,10 +11,10 @@ module.exports =(sequelize, DataTypes) =>{
             allowNull:false,
 
         },
-        preço:{
+        preco:{
             type: DataTypes.FLOAT,
             allowNull: false
         },
     });
-    return Peças
+    return Pecas
 }
