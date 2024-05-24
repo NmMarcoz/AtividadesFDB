@@ -1,4 +1,5 @@
 const { Pecas } = require("../models");
+const {Op} = require('sequelize')
 
 const findAllPeças = async (req, res) => {
   try {
@@ -32,7 +33,12 @@ const findPerName = async (req, res) => {
       });
     }
 
-    const peças = await Pecas.findAll({ where: { nome: nome } });
+    const peças = await Pecas.findAll({ 
+      where: 
+      { nome:{
+        [Op.like]: `%${nome}%`
+
+    }} });
     //return res.status(200).send({peças: peça})
     //console.log(peça)
     if (peças.length ===0) {
