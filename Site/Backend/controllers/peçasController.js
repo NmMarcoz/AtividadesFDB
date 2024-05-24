@@ -26,30 +26,28 @@ const findAllPeças = async (req, res) => {
 const findPerName = async (req, res) => {
   try {
     const nome = req.query.nome;
-    console.log("aquiiii");
-    console.log(nome);
     if (!nome) {
       return res.status(400).send({
         message: "O campo nome é obrigatório",
       });
     }
 
-    const peça = await Pecas.findAll({ where: { nome: nome } });
-    console.log(peça)
-    if (peça.length ===0) {
+    const peças = await Pecas.findAll({ where: { nome: nome } });
+    //return res.status(200).send({peças: peça})
+    //console.log(peça)
+    if (peças.length ===0) {
         return res.status(400).send({
             message: "não existem peças com esse nome"
-        })
+       })
         
     }
-
     return res.status(200).send({
       message: "Sucesso!",
-      peça: peça,
+      peça: peças,
     });
   } catch (error) {
     res.status(500).send({
-      message: "Não foi possível concluir a requisição",
+      message: "Não foi possível concluir a requisição de busca por nome",
       error: error,
     });
   }

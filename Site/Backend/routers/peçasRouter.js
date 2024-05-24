@@ -3,8 +3,9 @@ const router = express.Router();
 const peçasController = require('../controllers/peçasController')
 
 
-router.get("/", peçasController.findAllPeças);
 router.get("/search", peçasController.findPerName)
+router.get("/", peçasController.findAllPeças);
+
 router.get("/:id", peçasController.findByPk);
 router.post("/", peçasController.createPeça);
 

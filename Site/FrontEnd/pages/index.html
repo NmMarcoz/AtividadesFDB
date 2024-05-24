@@ -33,9 +33,11 @@
                 <div>
                   <input
                     class="form-control mr-sm-2"
+                    id = "inputQuery"
                     type="search"
                     placeholder="pesquisar por..."
-                    aria-label="Search"
+                    aria-label="Search",
+                    onchange="handleInputEvent()"
                   />
                 </div>
                 <button type="button" class="btn btn-outline-dark">Id</button>
@@ -64,53 +66,78 @@
               </thead>
               <tbody>
                 <script>
-                  const getData = async () => {
+                  const handleInputEvent  = () =>{
+                    const input = document.getElementById("inputQuery");
+                    populateRows(input.value)
+                    console.log(input.value)
+                  }
+                  const getData = async (search) => {
                     try {
-                      const response = await fetch(
-                        "http://localhost:3001/pecas",
-                        {
-                          method: "GET",
-                          mode: "cors",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
+
+                      if (!search) {
+                        console.log("...")
+                        const response = await fetch(
+                          "http://localhost:3001/pecas",
+                          {
+                            method: "GET",
+                            mode: "cors",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                          }
+                        );
+                        if (!response.ok) {
+                          throw new Error("Não consegui pegar os dados");
                         }
-                      );
-                      if (!response.ok) {
-                        throw new Error("Não consegui pegar os dados");
-                      }
-                      const data = await response.json();
-                     
-                      console.log(data);
-                      return data.peças;
-                      for(i = 0; i < data.peças.length; i++){
-                        console.log(data.peças[i])
+                        const data = await response.json();
+
+                        return data.peças;
+                      
+                      } else {
+                        query = encodeURI(search);
+                        console.log(query)
+                        const response = await fetch(
+                          `http://localhost:3001/pecas/search?nome=${query}`,
+                          {
+                            method: "GET",
+                            mode: "cors",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                          }
+                        );
+                        if (!response.ok) {
+                          throw new Error(
+                            "Não consegui pegar os dados durante a pesquisa"
+                          );
+                        }
+                        const data = await response.json();
+                        //console.log(data.peça);
+                        return data.peça;
                       }
                     } catch (error) {
                       console.error(error);
                     }
                   };
 
-                  const populateRows = async()=>{
-                    const data = await getData();
-                    const tableBody = document.querySelector("tbody")
-                    tableBody.innerHTML = ""
-                    console.log(data)
-                    data.forEach((data) =>{
-                      const tr = document.createElement("tr")
-                      tr.innerHTML = 
-                      `
+                  const populateRows = async (search) => {
+                    const data = await getData(search);
+                    const tableBody = document.querySelector("tbody");
+                    tableBody.innerHTML = "";
+                    console.log(data);
+                    data.forEach((data) => {
+                      const tr = document.createElement("tr");
+                      tr.innerHTML = `
                       <td>${data.id}</td>
                       <td>${data.nome}</td>
                       <td>${data.tipo}</td>
                       <td>${data.preco}</td>
-                      `
-                      tableBody.appendChild(tr)
-                    })
-                  }
+                      `;
+                      tableBody.appendChild(tr);
+                    });
+                  };
 
-               
-                  window.onLoad = populateRows(getData.peças);
+                  window.onLoad = populateRows();
                 </script>
               </tbody>
             </table>
