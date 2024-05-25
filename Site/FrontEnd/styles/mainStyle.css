@@ -81,3 +81,16 @@ header{
     display: flex;
     flex-direction: column;
 }
+a{
+    text-decoration: none;
+}
+.canceçar{
+    font-style: none;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.cancelar:hoover{
+    cursor: pointer;
+    font-style: none;
+}

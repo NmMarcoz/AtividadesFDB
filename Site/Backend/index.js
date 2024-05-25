@@ -9,7 +9,6 @@ const peçasRouter = require('./routers/peçasRouter')
 const db = require('./models');
 
 app.use('/pecas', peçasRouter);
-
 try{
     db.sequelize.sync().then(()=>{
         console.log("Connection ok!")

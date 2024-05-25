@@ -8,8 +8,9 @@ router.get("/", peçasController.findAllPeças);
 
 router.get("/:id", peçasController.findByPk);
 router.post("/", peçasController.createPeça);
-
+router.delete("/apocalipse", peçasController.deleteAll)
 router.delete("/:id", peçasController.deleteByPk);
+
 
 
 module.exports = router;

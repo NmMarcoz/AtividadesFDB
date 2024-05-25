@@ -137,10 +137,24 @@ const deleteByPk = async (req, res) => {
   }
 };
 
+const deleteAll = async(req,res)=>{
+  try{
+    await Pecas.truncate();
+    return res.status(200).send({message:"Tabela deletada com sucesso"})
+  }catch(error){
+    return res.status(500).send({
+      message: "Não foi possível concluir a requisição",
+      erro: error
+    })
+  }
+  
+}
+
 module.exports = {
   findAllPeças,
   createPeça,
   findPerName,
   findByPk,
   deleteByPk,
+  deleteAll
 };
