@@ -5,10 +5,12 @@ app.use(express.json());
 app.use(cors());
 
 const peçasRouter = require('./routers/peçasRouter')
+const admRouter = require('./routers/admRouter')
 
 const db = require('./models');
 
 app.use('/pecas', peçasRouter);
+app.use('/adm', admRouter );
 try{
     db.sequelize.sync().then(()=>{
         console.log("Connection ok!")

@@ -53,7 +53,11 @@
                 >
                   registrar
                 </button>
-                <button type="button" class="btn btn-outline-dark" onclick="handleDeleteButtonEvent()">
+                <button
+                  type="button"
+                  class="btn btn-outline-dark"
+                  onclick="handleDeleteButtonEvent()"
+                >
                   deletar tudo
                 </button>
               </div>
@@ -120,6 +124,59 @@
               </thead>
               <tbody>
                 <script>
+                  const deleteReq = async () => {
+                    try {
+                      const req = await fetch(
+                        "http://localhost:3001/pecas/apocalipse",
+                        {
+                          method: "DELETE",
+                          mode: "cors",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        }
+                      );
+                      const response = await req.json();
+                      console.log(response);
+                      populateRows();
+                    } catch (error) {
+                      window.alert(error);
+                      console.error(error);
+                    }
+                  };
+                  const windowAuth = async () => {
+                    window.alert("Insira os dados de adm a seguir");
+                    const nome = window.prompt("nome de usuario");
+                    const senha = window.prompt("senha");
+                    const user = {
+                      nome: nome,
+                      senha: senha,
+                    };
+                    try {
+                      const response = await fetch(
+                        "http://localhost:3001/adm/auth",
+                        {
+                          method: "POST",
+                          mode: "cors",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(user),
+                        }
+                      );
+                      await response.json();
+                      if (response.ok) {
+                        window.alert("autenticação concedida");
+                        deleteReq();
+                        return true;
+                      }else{
+                        window.alert("autenticação negada")
+                        return false
+                      }
+                    } catch (error) {
+                      window.alert(error);
+                    }
+                  };
                   const erasePlaceholders = () => {
                     const nameInput = document.getElementById("nameInput");
                     const typeInput = document.getElementById("typeInput");
@@ -129,24 +186,15 @@
                     nameInput.value = "";
                     typeInput.value = "";
                   };
-                  const handleDeleteButtonEvent = async () =>{
-                    try{
-                      const req = await fetch("http://localhost:3001/pecas/apocalipse",{
-                        method: 'DELETE',
-                        mode: 'cors',
-                        headers:{
-                          "Content-Type": "application/json",
-                        }
-                      })
-                      const response = await req.json();
-                      console.log(response)
-                      populateRows();
-                      
-                    }catch(error){
-                      window.alert(error)
-                      console.error(error)
+                  const handleDeleteButtonEvent = async () => {
+                    if (
+                      window.confirm(
+                        "Deseja realmente deletar todas as tabelas?"
+                      )
+                    ) {
+                      console.log(windowAuth());
                     }
-                  }
+                  };
                   const handleRegisterButtonEvent = async () => {
                     const nameInput = document.getElementById("nameInput");
                     const typeInput = document.getElementById("typeInput");
@@ -186,10 +234,10 @@
                           preço: ${valuePrice.toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL",
-                      })}`
+                          })}`
                         );
                         toggleForm();
-                      }else{
+                      } else {
                         window.alert(response.statusText);
                       }
 
@@ -268,7 +316,8 @@
                     const tableBody = document.querySelector("tbody");
                     tableBody.innerHTML = "";
                     console.log(data);
-                    data.forEach((data) => {
+                    if(data){
+                      data.forEach((data) => {
                       const tr = document.createElement("tr");
                       tr.innerHTML = `
                                        <td>${data.id}</td>
@@ -278,8 +327,10 @@
                                        `;
                       tableBody.appendChild(tr);
                     });
+                    }
+                   
                   };
-                  window.onLoad = populateRows(), toggleForm();
+                  (window.onLoad = populateRows()), toggleForm();
                 </script>
               </tbody>
             </table>
