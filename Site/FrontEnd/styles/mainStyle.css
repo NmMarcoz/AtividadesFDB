@@ -46,3 +46,38 @@ header{
 .table-right-nav-container{
     margin-left: 960px;
 }
+
+.main-form-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register-form-container{
+    width: 20vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    color: #fff;
+    background-color: #1C1A1A;
+    margin-bottom: 30px;
+    
+}
+.register-form-container input{
+    margin-bottom: 30px;
+    border-radius: 10px;
+    height: 40px;
+}
+.register-form-container button{
+    margin-bottom: 60px;
+}
+.register-form-container h1{
+    margin-top: 30px;
+}
+.input-container{
+    display: flex;
+    flex-direction: column;
+}

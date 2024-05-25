@@ -33,19 +33,20 @@
                 <div>
                   <input
                     class="form-control mr-sm-2"
-                    id = "inputQuery"
+                    id="inputQuery"
                     type="search"
-                    placeholder="pesquisar por..."
-                    aria-label="Search",
+                    placeholder="pesquisar por nome"
+                    aria-label="Search"
+                    ,
                     onchange="handleInputEvent()"
                   />
                 </div>
-                <button type="button" class="btn btn-outline-dark">Id</button>
+                <!-- <button type="button" class="btn btn-outline-dark">Id</button>
                 <button type="button" class="btn btn-outline-dark">Nome</button>
-                <button type="button" class="btn btn-outline-dark">Tipo</button>
+                <button type="button" class="btn btn-outline-dark">Tipo</button> -->
               </div>
               <div class="table-right-nav-container">
-                <button type="button" class="btn btn-outline-dark">
+                <button type="button" class="btn btn-outline-dark" onclick="toggleForm()">
                   registrar
                 </button>
                 <button type="button" class="btn btn-outline-dark">
@@ -54,6 +55,54 @@
               </div>
             </div>
           </nav>
+          <div class="main-form-container">
+            <form class="form-container" >
+              <div class="register-form-container" id="register-form">
+                <h1> Registrar Peça</h1>
+               
+                <div class="input-container">
+                  <a>
+                    nome
+                  </a>
+                  <input
+                    id="nameInput"
+                    type="name"
+                    placeholder="digite o nome da peça"
+                    aria-label="nome"
+                    
+                  />
+                </div>
+                <div class="input-container">
+                  <a>
+                    tipo
+                  </a>
+                  <input
+                    id="typeInput"
+                    type="name"
+                    placeholder="digite o tipo da peça"
+                    aria-label="nome"
+                   
+                  />
+                </div>
+                <div class="input-container">
+                  <a>
+                    preço
+                  </a>
+                  <input
+                    id="priceInput"
+                    type="text"
+                    placeholder="digite o preço da peça"
+                    aria-label="nome"
+                    
+                  />
+                </div>
+                <button type="button" class="btn btn-outline-light" onclick="handleRegisterButtonEvent()">
+                  cadastrar
+                </button>
+                <a> cancelar</a>
+              </div>
+            </form>
+          </div>
           <div class="table-container">
             <table class="table">
               <thead>
@@ -66,77 +115,124 @@
               </thead>
               <tbody>
                 <script>
-                  const handleInputEvent  = () =>{
-                    const input = document.getElementById("inputQuery");
-                    populateRows(input.value)
-                    console.log(input.value)
+                  const erasePlaceholders = ()=>{
+                    const nameInput = document.getElementById("nameInput")
+                    const typeInput = document.getElementById("typeInput")
+                    const priceInput = document.getElementById("priceInput")
+
+                    priceInput.value = ""
+                    nameInput.value = ""
+                    typeInput.value = ""
                   }
-                  const getData = async (search) => {
-                    try {
+                  const handleRegisterButtonEvent = async () =>{
+                    const nameInput = document.getElementById("nameInput")
+                    const typeInput = document.getElementById("typeInput")
+                    const priceInput = document.getElementById("priceInput")
 
-                      if (!search) {
-                        console.log("...")
-                        const response = await fetch(
-                          "http://localhost:3001/pecas",
-                          {
-                            method: "GET",
-                            mode: "cors",
-                            headers: {
-                              "Content-Type": "application/json",
-                            },
-                          }
-                        );
-                        if (!response.ok) {
-                          throw new Error("Não consegui pegar os dados");
-                        }
-                        const data = await response.json();
-
-                        return data.peças;
-                      
-                      } else {
-                        query = encodeURI(search);
-                        console.log(query)
-                        const response = await fetch(
-                          `http://localhost:3001/pecas/search?nome=${query}`,
-                          {
-                            method: "GET",
-                            mode: "cors",
-                            headers: {
-                              "Content-Type": "application/json",
-                            },
-                          }
-                        );
-                        if (!response.ok) {
-                          throw new Error(
-                            "Não consegui pegar os dados durante a pesquisa"
-                          );
-                        }
-                        const data = await response.json();
-                        //console.log(data.peça);
-                        return data.peça;
+                    console.log(nameInput.value)
+                    console.log(typeInput.value)
+                    console.log(typeInput.value)
+                    try{
+                      const req = {
+                        "nome": nameInput.value,
+                        "tipo": typeInput.value,
+                        "preco": Number(priceInput.value)
                       }
+                      const response = await fetch("http://localhost:3001/pecas",{
+                        method: "POST",
+                        mode: "cors",
+                        headers: {
+                            "Content-Type": "application/json",
+                          },
+                        body: JSON.stringify(req)
+                      
+                      })
+                      await response.json();
+                      console.log(response);
+                      window.alert("Peça registrada com sucesso!")
+                      erasePlaceholders();
+                      populateRows();
+                    }catch(error){
+                      console.error(error)
+                    }
+                  }
+                  const toggleForm = () =>{
+                    console.log("toggle")
+                    const form = document.getElementById("register-form")
+                    form.style.display == "none"? form.style.display = "flex":form.style.display = "none"
+                  }
+                  const handleInputEvent = () => {
+                    const input = document.getElementById("inputQuery");
+                    populateRows(input.value);
+                    console.log(input.value);
+                  };
+                  const getData = async () => {
+                    try {
+                      console.log("...");
+                      const response = await fetch(
+                        "http://localhost:3001/pecas",
+                        {
+                          method: "GET",
+                          mode: "cors",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        }
+                      );
+                      if (!response.ok) {
+                        throw new Error("Não consegui pegar os dados");
+                      }
+                      const data = await response.json();
+                      console.log(data);
+                      return data.peças;
                     } catch (error) {
                       console.error(error);
                     }
                   };
-
+                  const getDataByName = async (search) => {
+                    try {
+                      search = encodeURI(search);
+                      const response = await fetch(
+                        `http://localhost:3001/pecas/search?nome=${search}`,
+                        {
+                          method: "GET",
+                          mode: "cors",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        }
+                      );
+                      if (!response.ok) {
+                        throw new Error(
+                          "Não consegui pegar os dados durante a pesquisa"
+                        );
+                      }
+                      const data = await response.json();
+                      return data.peça;
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  };
                   const populateRows = async (search) => {
-                    const data = await getData(search);
+                    console.log(search);
+                    const data =
+                      typeof search == "undefined" || search == ""
+                        ? await getData()
+                        : await getDataByName(search);
                     const tableBody = document.querySelector("tbody");
                     tableBody.innerHTML = "";
                     console.log(data);
                     data.forEach((data) => {
                       const tr = document.createElement("tr");
                       tr.innerHTML = `
-                      <td>${data.id}</td>
-                      <td>${data.nome}</td>
-                      <td>${data.tipo}</td>
-                      <td>${data.preco}</td>
-                      `;
+                                       <td>${data.id}</td>
+                                       <td>${data.nome}</td>
+                                       <td>${data.tipo}</td>
+                                       <td>${data.preco}</td>
+                                       `;
                       tableBody.appendChild(tr);
                     });
                   };
-
                   window.onLoad = populateRows();
                 </script>
               </tbody>
