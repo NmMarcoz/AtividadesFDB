@@ -117,13 +117,19 @@
               <thead>
                 <tr>
                   <th scope="col">id</th>
-                  <th scope="col">nome</th>
+                  <th scope="col" onclick="handleNomeLabelEvent()" id="nome-column">nome</th>
                   <th scope="col">tipo</th>
                   <th scope="col">preço</th>
                 </tr>
               </thead>
               <tbody>
                 <script>
+                  let ordenarPorNome = 0
+                  const handleNomeLabelEvent = async ()=>{
+                    console.log(ordenarPorNome)
+                    ordenarPorNome == 1? ordenarPorNome = 0: ordenarPorNome = 1
+                    populateRows('', ordenarPorNome)
+                  }
                   const deleteReq = async () => {
                     try {
                       const req = await fetch(
@@ -307,7 +313,7 @@
                       console.error(error);
                     }
                   };
-                  const populateRows = async (search) => {
+                  const populateRows = async (search, orderByName) => {
                     console.log(search);
                     const data =
                       typeof search == "undefined" || search == ""
@@ -316,6 +322,19 @@
                     const tableBody = document.querySelector("tbody");
                     tableBody.innerHTML = "";
                     console.log(data);
+                    if(orderByName == 1){
+                      data.sort((a,b) =>{
+                        const nomeA = a.nome.toUpperCase();
+                        const nomeB = b.nome.toUpperCase();
+                        if(nomeA < nomeB){
+                          return -1
+                        }
+                        if(nomeB < nomeA){
+                          return 1
+                        }
+                        return 0
+                      })
+                    }
                     if(data){
                       data.forEach((data) => {
                       const tr = document.createElement("tr");
@@ -330,7 +349,7 @@
                     }
                    
                   };
-                  (window.onLoad = populateRows()), toggleForm();
+                  (window.onLoad = populateRows('')), toggleForm();
                 </script>
               </tbody>
             </table>
