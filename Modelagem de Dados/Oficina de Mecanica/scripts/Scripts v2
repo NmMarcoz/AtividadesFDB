@@ -1,0 +1,67 @@
+INSERTS
+INSERT INTO dbMecanica.clientes (nomeCliente, emailCliente, vip) 
+VALUES ('Maria Silva', 'maria@example.com', 1);
+
+INSERT INTO dbMecanica.veiculo (nome, marca, placa, tipo, clientes_idClientes) 
+VALUES ('Civic', 'Honda', 'XYZ5678', 'Sedan', 1);
+
+INSERT INTO dbMecanica.servicos (nomeServico, descServico, duracao, dataServico, preco, idVeiculo) 
+VALUES ('Troca de óleo', 'Trocar o óleo do motor.', 1.5, '2024-05-30', 50.00, 1);
+
+INSERT INTO dbMecanica.pecas (nomePeca, tipoPeca, precoPeca, servicos_idServico) 
+VALUES ('Filtro de óleo', 'Motor', 15.99, 1);
+
+INSERT INTO dbMecanica.funcionarios (nomeFuncionario, emailFuncionario, servicos_idServico) 
+VALUES ('José Santos', 'jose@example.com', 1);
+
+DELETES
+
+DELETE FROM dbMecanica.clientes WHERE idClientes = 1;
+
+DELETE FROM dbMecanica.veiculo WHERE idVeiculo = 1;
+
+DELETE FROM dbMecanica.servicos WHERE idServico = 1;
+
+DELETE FROM dbMecanica.servicos WHERE idServico = 1;
+
+DELETE FROM dbMecanica.funcionarios WHERE idFuncionario = 1;
+
+UPDATES
+
+UPDATE dbMecanica.clientes SET emailCliente = 'maria.silva@example.com' WHERE idClientes = 2;
+
+UPDATE dbMecanica.servicos SET preco = 55.00 WHERE idServico = 2;
+
+UPDATE dbMecanica.pecas SET tipoPeca = 'Filtro de Ar' WHERE idPeca = 2;
+
+UPDATE dbMecanica.funcionarios SET nomeFuncionario = 'Pedro Oliveira' WHERE idFuncionario = 2;
+
+UPDATE dbMecanica.servicos SET descServico = 'Troca de óleo e filtro de óleo do motor.' WHERE idServico = 2;
+
+SELECTS
+
+SELECT * FROM dbMecanica.clientes;
+
+SELECT * FROM dbMecanica.veiculo;
+
+SELECT * FROM dbMecanica.servicos;
+
+SELECT * FROM dbMecanica.pecas;
+
+SELECT * FROM dbMecanica.funcionarios;
+
+SELECT nomeCliente, emailCliente FROM dbMecanica.clientes;
+
+SELECT nome, marca, tipo FROM dbMecanica.veiculo;
+
+SELECT nomeServico, descServico FROM dbMecanica.servicos;
+
+SELECT nomePeca, tipoPeca FROM dbMecanica.pecas;
+
+SELECT nomeFuncionario, emailFuncionario FROM dbMecanica.funcionarios;
+
+SELECT * FROM dbMecanica.veiculo where clientes_idClientes = 1;
+
+
+
+

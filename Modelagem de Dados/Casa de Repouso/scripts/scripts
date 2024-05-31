@@ -1,0 +1,134 @@
+-- Inserts na tabela `idosos`
+INSERT INTO `casaderepouso`.`idosos` (`nome`, `idade`) VALUES ('João Silva', 80);
+INSERT INTO `casaderepouso`.`idosos` (`nome`, `idade`) VALUES ('Maria Oliveira', 75);
+INSERT INTO `casaderepouso`.`idosos` (`nome`, `idade`) VALUES ('Carlos Pereira', 82);
+INSERT INTO `casaderepouso`.`idosos` (`nome`, `idade`) VALUES ('Ana Souza', 78);
+INSERT INTO `casaderepouso`.`idosos` (`nome`, `idade`) VALUES ('Luiza Lima', 79);
+
+-- Inserts na tabela `responsaveis`
+INSERT INTO `casaderepouso`.`responsaveis` (`nome`, `id_idosos`) VALUES ('Pedro Silva', 1);
+INSERT INTO `casaderepouso`.`responsaveis` (`nome`, `id_idosos`) VALUES ('Fernanda Oliveira', 2);
+INSERT INTO `casaderepouso`.`responsaveis` (`nome`, `id_idosos`) VALUES ('Rafael Pereira', 3);
+INSERT INTO `casaderepouso`.`responsaveis` (`nome`, `id_idosos`) VALUES ('Juliana Souza', 4);
+INSERT INTO `casaderepouso`.`responsaveis` (`nome`, `id_idosos`) VALUES ('Marcelo Lima', 5);
+
+-- Inserts na tabela `medicos`
+INSERT INTO `casaderepouso`.`medicos` (`nome`, `crm`) VALUES ('Dr. Roberto', 'CRM12345');
+INSERT INTO `casaderepouso`.`medicos` (`nome`, `crm`) VALUES ('Dr. Fernanda', 'CRM67890');
+INSERT INTO `casaderepouso`.`medicos` (`nome`, `crm`) VALUES ('Dr. Paulo', 'CRM54321');
+INSERT INTO `casaderepouso`.`medicos` (`nome`, `crm`) VALUES ('Dr. Helena', 'CRM98765');
+INSERT INTO `casaderepouso`.`medicos` (`nome`, `crm`) VALUES ('Dr. Lucas', 'CRM11223');
+
+-- Inserts na tabela `atendimentos`
+INSERT INTO `casaderepouso`.`atendimentos` (`id`, `titulo`, `descricao`, `data`, `idosos_id`, `medicos_id`) VALUES (1, 'Consulta', 'Rotina mensal', '2024-05-01', 1, 1);
+INSERT INTO `casaderepouso`.`atendimentos` (`id`, `titulo`, `descricao`, `data`, `idosos_id`, `medicos_id`) VALUES (2, 'Exame', 'Exame de sangue', '2024-05-05', 2, 2);
+INSERT INTO `casaderepouso`.`atendimentos` (`id`, `titulo`, `descricao`, `data`, `idosos_id`, `medicos_id`) VALUES (3, 'Check-up', 'Avaliação geral', '2024-05-10', 3, 3);
+INSERT INTO `casaderepouso`.`atendimentos` (`id`, `titulo`, `descricao`, `data`, `idosos_id`, `medicos_id`) VALUES (4, 'Consulta', 'Rotina mensal', '2024-05-15', 4, 4);
+INSERT INTO `casaderepouso`.`atendimentos` (`id`, `titulo`, `descricao`, `data`, `idosos_id`, `medicos_id`) VALUES (5, 'Exame', 'Exame de urina', '2024-05-20', 5, 5);
+
+-- Inserts na tabela `enfermeiros`
+INSERT INTO `casaderepouso`.`enfermeiros` (`id`, `nome`, `coren`, `atendimentos_id`) VALUES (1, 'Enf. José', 'COREN123', 1);
+INSERT INTO `casaderepouso`.`enfermeiros` (`id`, `nome`, `coren`, `atendimentos_id`) VALUES (2, 'Enf. Maria', 'COREN456', 2);
+INSERT INTO `casaderepouso`.`enfermeiros` (`id`, `nome`, `coren`, `atendimentos_id`) VALUES (3, 'Enf. João', 'COREN789', 3);
+INSERT INTO `casaderepouso`.`enfermeiros` (`id`, `nome`, `coren`, `atendimentos_id`) VALUES (4, 'Enf. Ana', 'COREN321', 4);
+INSERT INTO `casaderepouso`.`enfermeiros` (`id`, `nome`, `coren`, `atendimentos_id`) VALUES (5, 'Enf. Carlos', 'COREN654', 5);
+
+
+-- Deletes na tabela `enfermeiros`
+DELETE FROM `casaderepouso`.`enfermeiros` WHERE `id` = 1;
+DELETE FROM `casaderepouso`.`enfermeiros` WHERE `id` = 2;
+DELETE FROM `casaderepouso`.`enfermeiros` WHERE `id` = 3;
+DELETE FROM `casaderepouso`.`enfermeiros` WHERE `id` = 4;
+DELETE FROM `casaderepouso`.`enfermeiros` WHERE `id` = 5;
+
+-- Deletes na tabela `atendimentos`
+DELETE FROM `casaderepouso`.`atendimentos` WHERE `id` = 1;
+DELETE FROM `casaderepouso`.`atendimentos` WHERE `id` = 2;
+DELETE FROM `casaderepouso`.`atendimentos` WHERE `id` = 3;
+DELETE FROM `casaderepouso`.`atendimentos` WHERE `id` = 4;
+DELETE FROM `casaderepouso`.`atendimentos` WHERE `id` = 5;
+
+-- Deletes na tabela `medicos`
+DELETE FROM `casaderepouso`.`medicos` WHERE `id` = 1;
+DELETE FROM `casaderepouso`.`medicos` WHERE `id` = 2;
+DELETE FROM `casaderepouso`.`medicos` WHERE `id` = 3;
+DELETE FROM `casaderepouso`.`medicos` WHERE `id` = 4;
+DELETE FROM `casaderepouso`.`medicos` WHERE `id` = 5;
+
+-- Deletes na tabela `responsaveis`
+DELETE FROM `casaderepouso`.`responsaveis` WHERE `id` = 1;
+DELETE FROM `casaderepouso`.`responsaveis` WHERE `id` = 2;
+DELETE FROM `casaderepouso`.`responsaveis` WHERE `id` = 3;
+DELETE FROM `casaderepouso`.`responsaveis` WHERE `id` = 4;
+DELETE FROM `casaderepouso`.`responsaveis` WHERE `id` = 5;
+
+-- Deletes na tabela `idosos`
+DELETE FROM `casaderepouso`.`idosos` WHERE `id` = 1;
+DELETE FROM `casaderepouso`.`idosos` WHERE `id` = 2;
+DELETE FROM `casaderepouso`.`idosos` WHERE `id` = 3;
+DELETE FROM `casaderepouso`.`idosos` WHERE `id` = 4;
+DELETE FROM `casaderepouso`.`idosos` WHERE `id` = 5;
+
+----------------------------------------------------------
+-- Updates na tabela `idosos`
+UPDATE `casaderepouso`.`idosos` SET `nome` = 'João da Silva', `idade` = 81 WHERE `id` = 1;
+UPDATE `casaderepouso`.`idosos` SET `nome` = 'Maria de Oliveira', `idade` = 76 WHERE `id` = 2;
+UPDATE `casaderepouso`.`idosos` SET `nome` = 'Carlos dos Santos', `idade` = 83 WHERE `id` = 3;
+UPDATE `casaderepouso`.`idosos` SET `nome` = 'Ana de Souza', `idade` = 79 WHERE `id` = 4;
+UPDATE `casaderepouso`.`idosos` SET `nome` = 'Luiza da Lima', `idade` = 80 WHERE `id` = 5;
+
+-- Updates na tabela `responsaveis`
+UPDATE `casaderepouso`.`responsaveis` SET `nome` = 'Pedro da Silva' WHERE `id` = 1;
+UPDATE `casaderepouso`.`responsaveis` SET `nome` = 'Fernanda de Oliveira' WHERE `id` = 2;
+UPDATE `casaderepouso`.`responsaveis` SET `nome` = 'Rafael dos Santos' WHERE `id` = 3;
+UPDATE `casaderepouso`.`responsaveis` SET `nome` = 'Juliana de Souza' WHERE `id` = 4;
+UPDATE `casaderepouso`.`responsaveis` SET `nome` = 'Marcelo da Lima' WHERE `id` = 5;
+
+--
+-- Select na tabela `idosos`
+SELECT * FROM `casaderepouso`.`idosos`;
+
+-- Select na tabela `responsaveis`
+SELECT * FROM `casaderepouso`.`responsaveis`;
+
+-- Select na tabela `medicos`
+SELECT * FROM `casaderepouso`.`medicos`;
+
+-- Select na tabela `atendimentos`
+SELECT * FROM `casaderepouso`.`atendimentos`;
+
+-- Select na tabela `enfermeiros`
+SELECT * FROM `casaderepouso`.`enfermeiros`;
+
+-- Select detalhado de idosos com seus respectivos responsáveis
+SELECT id.id, id.nome, id.idade, res.nome AS nome_responsavel
+FROM `casaderepouso`.`idosos` id
+JOIN `casaderepouso`.`responsaveis` res ON id.id = res.id_idosos;
+
+-- Select de atendimentos com detalhes de idosos e médicos envolvidos
+SELECT a.id, a.titulo, a.descricao, a.data, i.nome AS nome_idoso, m.nome AS nome_medico
+FROM `casaderepouso`.`atendimentos` a
+JOIN `casaderepouso`.`idosos` i ON a.idosos_id = i.id
+JOIN `casaderepouso`.`medicos` m ON a.medicos_id = m.id;
+
+-- Select de enfermeiros com detalhes dos atendimentos associados
+SELECT e.id, e.nome, e.coren, a.titulo AS titulo_atendimento, a.descricao AS descricao_atendimento
+FROM `casaderepouso`.`enfermeiros` e
+JOIN `casaderepouso`.`atendimentos` a ON e.atendimentos_id = a.id;
+
+-- Select para encontrar idosos atendidos por um médico específico (por exemplo, Dr. Roberto)
+SELECT id.id, id.nome, id.idade
+FROM `casaderepouso`.`idosos` id
+JOIN `casaderepouso`.`atendimentos` a ON id.id = a.idosos_id
+JOIN `casaderepouso`.`medicos` m ON a.medicos_id = m.id
+WHERE m.nome = 'Dr. Roberto';
+
+-- Select para listar todos os atendimentos realizados em uma data específica (por exemplo, 2024-05-01)
+SELECT a.id, a.titulo, a.descricao, a.data, i.nome AS nome_idoso, m.nome AS nome_medico
+FROM `casaderepouso`.`atendimentos` a
+JOIN `casaderepouso`.`idosos` i ON a.idosos_id = i.id
+JOIN `casaderepouso`.`medicos` m ON a.medicos_id = m.id
+WHERE a.data = '2024-05-01';
+
+
+

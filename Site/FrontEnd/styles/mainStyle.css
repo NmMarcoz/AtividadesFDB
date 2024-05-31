@@ -1,96 +1,275 @@
-body{
-    margin: 0;
+@media screen and (min-width: 412px){
+    header{
+        background: #1C1A1A;
+        color: #fff;
+        height: 10vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    .title-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    h1{
+        margin: 0;
+        padding: 0;
+    }
+    .main-form-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .register-form-container{
+        margin-top: 10px;
+        width: 80vw;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        border-radius: 30px;
+        color: #fff;
+        background-color: #1C1A1A;
+        margin-bottom: 30px;
+        
+    }
+    .register-form-container input{
+        margin-bottom: 30px;
+        border-radius: 10px;
+        height: 40px;
+    }
+    .register-form-container button{
+        margin-bottom: 30px;
+        margin-left: 10px;
+    }
+    .register-form-container h1{
+        margin-top: 30px;
+    }
+    .input-container{
+        display: flex;
+        flex-direction: column;
+    }
+    a{
+        text-decoration: none;
+    }
+    .cancelar{
+        font-style: none;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .cancelar:hoover{
+        cursor: pointer;
+        font-style: none;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    body{
+        margin: 0;
+    }
+    header{
+        background: #1C1A1A;
+        width: 100vw;
+        height: 100px;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+    header h1{
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    h1{
+        color:#fff ;
+        margin: 0;
+    }
+    h2{
+        margin: 0;
+    }
+    .page-container{
+        margin-top: 37px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+       
+    .title{
+        color: #fff;
+        font-family: 'Poppins';
+        font-weight: 400;
+    }
+    .table-nav{
+        display: flex;
+        margin-bottom: 37px;
+    }
+    .table-main-nav-container{
+        display: flex;
+    }
+    .table-nav-container{
+        display: flex;
+    }
+    .table-right-nav-container{
+        margin-left: 10px;
+    }
+    .main-form-container{
+        display: flex;
+        align-items: center;
+        justify-content: left;
+    }
+    .register-form-container{
+        width: 30vw;
+        height: 60vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        border-radius: 30px;
+        color: #fff;
+        background-color: #1C1A1A;
+        margin-bottom: 30px;
+        
+    }
+    .register-form-container input{
+        margin-bottom: 30px;
+        border-radius: 10px;
+        height: 40px;
+    }
+    .register-form-container button{
+        margin-bottom: 30px;
+        margin-left: 10px;
+    }
+    .register-form-container h1{
+        margin-top: 30px;
+    }
+    .input-container{
+        display: flex;
+        flex-direction: column;
+    }
+    a{
+        text-decoration: none;
+    }
+    .cancelar{
+        font-style: none;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .cancelar:hoover{
+        cursor: pointer;
+        font-style: none;
+    }
+
     
 }
-
-h1{
-    margin: 0;
-}
-h2{
-    margin: 0;
-}
-.title-container{
-    padding-left: 46px;
-    padding-top: 36px;
-}
-
-.title{
-    color: #fff;
-    font-family: 'Poppins';
-    font-weight: 400;
-}
-
-header{
-    background: #1C1A1A;
-    width: 100vw;
-    height: 117px;
-}
-
-.page-container{
-    margin-top: 37px;
-    margin-left: 150px;
-    margin-right: 150px;
-}
-
-
-.table-nav{
-    display: flex;
-    margin-bottom: 37px;
-}
-.table-main-nav-container{
-    display: flex;
-}
-.table-nav-container{
-    display: flex;
-}
-.table-right-nav-container{
-    margin-left: 960px;
-}
-
-.main-form-container{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.register-form-container{
-    width: 20vw;
-    height: 60vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 30px;
-    color: #fff;
-    background-color: #1C1A1A;
-    margin-bottom: 30px;
+@media screen and (min-width: 1920px) {
+    body{
+        margin: 0;
+        
+    }
     
+    h1{
+        margin: 0;
+    }
+    h2{
+        margin: 0;
+    }
+    .title-container{
+        padding-left: 46px;
+        padding-top: 36px;
+    }
+    
+    .title{
+        color: #fff;
+        font-family: 'Poppins';
+        font-weight: 400;
+    }
+    
+    header{
+        background: #1C1A1A;
+        width: 100vw;
+        height: 117px;
+    }
+    
+    .page-container{
+        margin-top: 37px;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+    
+    
+    .table-nav{
+        display: flex;
+        margin-bottom: 37px;
+    }
+    .table-main-nav-container{
+        display: flex;
+    }
+    .table-nav-container{
+        display: flex;
+    }
+    .table-right-nav-container{
+        margin-left: 960px;
+    }
+    .button-container{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .main-form-container{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .register-form-container{
+        width: 20vw;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        border-radius: 30px;
+        color: #fff;
+        background-color: #1C1A1A;
+        margin-bottom: 30px;
+        
+    }
+    .register-form-container input{
+        margin-bottom: 30px;
+        border-radius: 10px;
+        height: 40px;
+    }
+    .register-form-container button{
+        margin-bottom: 30px;
+    }
+    .register-form-container h1{
+        margin-top: 30px;
+    }
+    .input-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .button-container{
+        display: flex;
+        flex-direction: row;
+    }
+    a{
+        text-decoration: none;
+    }
+    .cancelar{
+        font-style: none;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .cancelar:hoover{
+        cursor: pointer;
+        font-style: none;
+    }
 }
-.register-form-container input{
-    margin-bottom: 30px;
-    border-radius: 10px;
-    height: 40px;
-}
-.register-form-container button{
-    margin-bottom: 60px;
-}
-.register-form-container h1{
-    margin-top: 30px;
-}
-.input-container{
-    display: flex;
-    flex-direction: column;
-}
-a{
-    text-decoration: none;
-}
-.canceçar{
-    font-style: none;
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
-}
-.cancelar:hoover{
-    cursor: pointer;
-    font-style: none;
-}
+

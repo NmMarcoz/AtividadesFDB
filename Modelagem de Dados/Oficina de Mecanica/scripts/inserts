@@ -1,0 +1,77 @@
+
+INSERTS
+1. Veiculo
+INSERT INTO dbMecanica.veiculo (idCliente, nome, marca, placa, tipo) 
+VALUES (1, 'Gol', 'Volkswagen', 'ABC1234', 'Sedan');
+
+2. Cliente
+INSERT INTO dbMecanica.clientes (nomeCliente, emailCliente, vip, veiculo_idVeiculo) 
+VALUES ('João Silva', 'joao@example.com', 0, 1);
+
+3. Funcionário
+INSERT INTO dbMecanica.funcionarios (nomeFuncionario, emailFuncionario, servicos_idServico) 
+VALUES ('Maria Oliveira', 'maria@example.com', 1);
+
+4. Serviço
+INSERT INTO dbMecanica.servicos (nomeServico, descServico, duracao, dataServico, idVeiculo, peças_idPeças, funcionarios_idfuncionario) 
+VALUES ('Troca de óleo', 'Trocar o óleo do motor.', 1.5, '2024-05-30', 1, 1, 1);
+
+5. Peça
+INSERT INTO dbMecanica.pecas (servicos_idServico, nomePeca, tipoPeca, precoPeca) 
+VALUES (1, 'Filtro de óleo', 'Motor', 15.99);
+---------------------------------------------------------------------------------
+SELECTS
+1. Selecionar todos os veículos
+SELECT * FROM dbMecanica.veiculo;
+
+2. Selecionar todos os clientes
+SELECT * FROM dbMecanica.clientes;
+
+3. Selecionar todos os funcionários
+SELECT * FROM dbMecanica.funcionarios;
+
+4. Selecionar todos os serviços
+SELECT * FROM dbMecanica.servicos;
+
+5. Selecionar todas as peças
+SELECT * FROM dbMecanica.pecas;
+-------------------------------------------------------------------------------
+DELETS
+1. Deletar um veículo
+DELETE FROM dbMecanica.veiculo WHERE idVeiculo = 1;
+
+2. Deletar um cliente
+DELETE FROM dbMecanica.clientes WHERE idClientes = 1;
+
+3. Deletar um funcionário
+DELETE FROM dbMecanica.funcionarios WHERE idFuncionario = 1;
+
+4. Deletar um serviço
+DELETE FROM dbMecanica.servicos WHERE idServico = 1;
+
+5. Deletar uma peça
+DELETE FROM dbMecanica.pecas WHERE idPeca = 1;
+-------------------------------------------------------------------------------
+UPDATES
+1. Atualizar o nome do veículo
+UPDATE dbMecanica.veiculo SET nome = 'Civic' WHERE idVeiculo = 2;
+
+2. Atualizar o email do cliente
+UPDATE dbMecanica.clientes SET emailCliente = 'joao.silva@example.com' WHERE idClientes = 1;
+
+3. Atualizar o nome do funcionário
+UPDATE dbMecanica.funcionarios SET nomeFuncionario = 'Pedro Oliveira' WHERE idFuncionario = 2;
+
+4. Atualizar a descrição do serviço
+UPDATE dbMecanica.servicos SET descServico = 'Troca de óleo e filtro de óleo do motor.' WHERE idServico = 1;
+
+5. Atualizar o tipo da peça
+UPDATE dbMecanica.pecas SET tipoPeca = 'Filtro de Ar' WHERE idPeca = 1;
+
+
+
+
+
+
+
+

@@ -90,9 +90,7 @@ const findByPk = async (req, res) => {
 const createPeça = async (req, res) => {
   try {
     const request = req.body;
-    console.log(req.body);
-    //console.log(req.body.tipo)
-    console.log(request);
+  
     const { nome, tipo, preco } = request;
     if (!nome || !tipo || !preco) {
       return res
