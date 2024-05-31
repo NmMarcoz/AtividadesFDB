@@ -18,7 +18,7 @@ const findAllPeças = async (req, res) => {
   } catch (error) {
     console.error("Erro durante a consulta nos dados, erro: ", error);
     return res.status(500).send({
-      message: "Erro durante a consulta de dados",
+      message: "Erro durante a comunicação com o banco",
       error: error,
     }); 
   }
@@ -53,7 +53,7 @@ const findPerName = async (req, res) => {
     });
   } catch (error) {
     res.status(500).send({
-      message: "Não foi possível concluir a requisição de busca por nome",
+      message: "Erro durante a comunicação com o banco",
       error: error,
     });
   }
@@ -81,7 +81,7 @@ const findByPk = async (req, res) => {
     });
   } catch (error) {
     res.status(500).send({  
-      message: "Não foi possível concluir a requisição",
+      message: "Erro durante a comunicação com o banco",
       erro: error,
     });
   }
@@ -105,7 +105,7 @@ const createPeça = async (req, res) => {
   } catch (error) {
     console.error("Erro durante a a criação, erro: ", error);
     return res.status(500).send({
-      message: "Erro interno de servidor",
+      message: "Erro durante a comunicação com o banco",
       error: error,
     });
   }
@@ -130,7 +130,7 @@ const deleteByPk = async (req, res) => {
     });
   } catch (error) {
     res.status(500).send({
-      message: "Erro interno de servidor",
+      message: "Erro durante a comunicação com o banco",
     });
   }
 };
@@ -141,11 +141,56 @@ const deleteAll = async(req,res)=>{
     return res.status(200).send({message:"Tabela deletada com sucesso"})
   }catch(error){
     return res.status(500).send({
-      message: "Não foi possível concluir a requisição",
+      message: "Erro durante a comunicação com o banco",
       erro: error
     })
   }
   
+}
+
+const updatePerId = async(req,res)=>{
+  try{
+    const id = req.params.id
+    const update = req.body
+    if(!update){
+      return res.status(400).send({
+        message: "insira ao menos um campo"
+      })
+    }
+    const {nome, tipo, preco} = update
+    if(!nome && !tipo && preco){
+      return res.status(400).send({
+        message: "insira pelo menos um campo"
+      })
+    }
+    await Pecas.update(
+      { 
+        nome: nome,
+        tipo: tipo,
+        preco: preco
+       },
+      {
+        where: {
+          id: id
+        },
+      },
+    )
+    const peca = await Pecas.findByPk(id, {
+      attributes: ['id', 'nome', 'tipo', 'preco'],
+    })
+
+    return res.status(200).send({
+      message: "peça alterada com sucesso", 
+      peça: peca
+    })
+
+  }catch(error){
+    return res.status(500).send({
+     
+      message: "Erro durante a comunicação com o banco"
+      
+    })
+  }
 }
 
 module.exports = {
@@ -154,5 +199,6 @@ module.exports = {
   findPerName,
   findByPk,
   deleteByPk,
-  deleteAll
+  deleteAll,
+  updatePerId
 };

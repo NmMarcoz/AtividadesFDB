@@ -10,6 +10,7 @@ router.get("/:id", peçasController.findByPk);
 router.post("/", peçasController.createPeça);
 router.delete("/apocalipse", peçasController.deleteAll)
 router.delete("/:id", peçasController.deleteByPk);
+router.patch("/:id", peçasController.updatePerId)
 
 
 
