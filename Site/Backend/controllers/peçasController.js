@@ -158,7 +158,7 @@ const updatePerId = async(req,res)=>{
       })
     }
     const {nome, tipo, preco} = update
-    if(!nome && !tipo && preco){
+    if(!nome && !tipo && !preco){
       return res.status(400).send({
         message: "insira pelo menos um campo"
       })
