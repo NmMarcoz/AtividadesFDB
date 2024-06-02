@@ -95,9 +95,9 @@ public class UserServices {
             query = Querys.LISTAR;
         }else{
             query = "SELECT * FROM user WHERE ("
-                    + "idUser LIKE'" + buscar + "%' OR "
-                    + "name LIKE'" + buscar + "%' OR "
-                    + "user LIKE'" + buscar + "%'"
+                    + "id LIKE'%" + buscar + "%' OR "
+                    + "name LIKE'%" + buscar + "%' OR "
+                    + "user LIKE'%" + buscar + "%'"
                     + ")";
         }
         
@@ -107,7 +107,7 @@ public class UserServices {
             ResultSet rs = st.executeQuery(query);
             
             while(rs.next()){
-                data[0] = rs.getString("idUser");
+                data[0] = rs.getString("id");
                 data[1] = rs.getString("name");
                 data[2] = rs.getString("user");
                 data[3] = rs.getString("password");
