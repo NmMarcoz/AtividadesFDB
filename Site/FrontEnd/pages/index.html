@@ -23,6 +23,7 @@
         <div class="title-container">
           <h1 class="title">Oficina de Mecânica</h1>
         </div>
+        <a> Autor: Marcos Nogueira </a>
       </header>
       <main>
         <div class="page-container">
@@ -66,7 +67,10 @@
           <div class="main-form-container">
             <form class="form-container">
               <div class="register-form-container" id="register-form">
-                <h1>Registrar Peça</h1>
+                <h1 id="form-title">Registrar Peça</h1>
+                <a id="id-form">
+                  id
+                </a>
 
                 <div class="input-container">
                   <a> nome </a>
@@ -99,14 +103,24 @@
                   <button
                     type="button"
                     class="btn btn-outline-light"
-                    onclick="handleRegisterButtonEvent()"
+                    onclick=" handleRegisterButtonEvent()"
+                    id="register-button"
                   >
                     cadastrar
                   </button>
                   <button
                     type="button"
                     class="btn btn-outline-light"
+                    onclick="handleEditButtonEvent(document.getElementById('id-form').innerText)"
+                    id="edit-button"
+                  >
+                    editar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-light"
                     onclick="toggleForm()"
+                    
                   >
                     cancelar
                   </button>
@@ -128,6 +142,8 @@
                   </th>
                   <th scope="col">tipo</th>
                   <th scope="col">preço</th>
+                  <th>opções</th>
+
                 </tr>
               </thead>
               <tbody></tbody>
@@ -140,18 +156,14 @@
   <script>
     let ordenarPorNome = 0;
 
-     
-
-    const preventNumber = () =>{
-      const inputPreco = document.getElementById("priceInput")
+    const preventNumber = () => {
+      const inputPreco = document.getElementById("priceInput");
       let regexp = /^[0-9.]+$/;
-      if(!inputPreco.value.match(regexp)){   
-        inputPreco.value = ""
+      if (!inputPreco.value.match(regexp)) {
+        inputPreco.value = "";
       }
-    }
-  
+    };
 
-  
     const handleNomeLabelEvent = async () => {
       console.log(ordenarPorNome);
       ordenarPorNome == 1 ? (ordenarPorNome = 0) : (ordenarPorNome = 1);
@@ -240,7 +252,49 @@
       }
       populateRows();
     };
+    const handleEditButtonEvent = async (id) => {
+      const title = document.getElementById("form-title")
+      title.innerText = "Editar peça"
+      const nameInput = document.getElementById("nameInput");
+      const typeInput = document.getElementById("typeInput");
+      const priceInput = document.getElementById("priceInput");
+
+      const valueName = nameInput.value;
+      const valueType = typeInput.value;
+      const valuePrice = Number(priceInput.value);
+      try {
+        const req = {
+          nome: valueName.length == 0? null: valueName,
+          tipo: valueType.length == 0? null: valueType,
+          preco: valuePrice.length == 0? null: valuePrice,
+        };
+        const response = await fetch(`http://localhost:3001/pecas/${id}`, {
+          method: "PATCH",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(req),
+        });
+        const res = await response.json();
+        console.log(response);
+        if (res.ok) {
+          window.alert(res.message)
+          toggleForm();
+        } else {
+          window.alert(res.message);
+        }
+
+        erasePlaceholders();
+        toggleForm();
+        populateRows();
+      } catch (error) {
+        window.alert(error);
+        console.error(error);
+      }
+    };
     const handleRegisterButtonEvent = async () => {
+     
       const nameInput = document.getElementById("nameInput");
       const typeInput = document.getElementById("typeInput");
       const priceInput = document.getElementById("priceInput");
@@ -249,9 +303,7 @@
       const valueType = typeInput.value;
       const valuePrice = Number(priceInput.value);
 
-      console.log(nameInput.value);
-      console.log(typeInput.value);
-      console.log(typeInput.value);
+  
       try {
         const req = {
           nome: valueName,
@@ -291,16 +343,41 @@
         console.error(error);
       }
     };
-    const toggleForm = () => {
+    const toggleForm = (id, nome, tipo, preco) => {
+      const title = document.getElementById("form-title")
+     
       const form = document.getElementById("register-form");
+      const idForm = document.getElementById("id-form")
+      const editButton = document.getElementById("edit-button")
+      const registerButton = document.getElementById("register-button")
+
+      const nameInput = document.getElementById("nameInput");
+      const typeInput = document.getElementById("typeInput");
+      const priceInput = document.getElementById("priceInput");
+
+      
       toggleTable();
       form.style.display == "none"
         ? (form.style.display = "flex")
         : (form.style.display = "none");
+      if(!id){
+        idForm.style.display = "none"
+        title.innerText = "Registrar peça"
+        registerButton.style.display = "flex"
+        editButton.style.display = "none"
+      }else{
+        idForm.style.display = "flex"
+        idForm.innerText = id
+        title.innerText = "Editar peça"
+        registerButton.style.display = "none"
+        editButton.style.display = "flex"
+        priceInput.value = preco;
+        nameInput.value = nome;
+        typeInput.value = tipo;
+      }
     };
     const toggleTable = () => {
       const table = document.getElementById("table");
-      console.log("TOGLANDO");
       table.style.display == "flex"
         ? (table.style.display = "none")
         : (table.style.display = "flex");
@@ -387,12 +464,20 @@
                          })}</td>
                          <td>
                             <button
-                            type="button"
-                            class="btn btn-outline-dark"
-                            onclick="handleSingleDeleteButtonEvent (${data.id})"
-                          > deletar
-                          </button>
-                          </td>
+                              type="button"
+                              class="btn btn-outline-dark"
+                              onclick="toggleForm(${data.id}, '${data.nome}', '${data.tipo}', ${data.preco})"
+                            >
+                                editar
+                            </button> 
+                            <button
+                              type="button"
+                              class="btn btn-outline-dark"
+                              onclick="handleSingleDeleteButtonEvent(${data.id})"
+                            > 
+                              deletar
+                            </button>
+                            </td>
                         
                          `;
           tableBody.appendChild(tr);

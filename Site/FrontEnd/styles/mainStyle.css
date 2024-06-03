@@ -166,7 +166,7 @@
 
     
 }
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1600px) {
     body{
         margin: 0;
         
@@ -192,7 +192,7 @@
     header{
         background: #1C1A1A;
         width: 100vw;
-        height: 117px;
+        height: 130px;
     }
     
     .page-container{
